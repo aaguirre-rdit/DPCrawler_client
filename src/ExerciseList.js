@@ -15,7 +15,7 @@ const ListContainer = styled.div`
 export default class ExerciseList extends React.Component{
   render(){
     const easyData = this.props.list.filter(exercise => exercise.difficulty==='Easy');
-    const mediumData = this.props.list.filter(exercise => exercise.difficulty==='Medium');
+    const mediumData = this.props.list.filter(exercise => exercise.difficulty==='Intermediate');
     const hardData = this.props.list.filter(exercise => exercise.difficulty==='Hard');
 
     return(
@@ -59,7 +59,7 @@ export default class ExerciseList extends React.Component{
             ))}
           </ListContainer>
         </TabPane>
-        <TabPane tab="Medium" key="Medium"><ListContainer>
+        <TabPane tab="Internediate" key="Intermediate"><ListContainer>
           {mediumData.map(exercise=>(
             <Card
               style={{margin:'1rem 0.5rem'}}

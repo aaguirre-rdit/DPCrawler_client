@@ -37,6 +37,13 @@ export default class Editor extends React.Component{
     this.setState({
       language:value
     })
+  };
+  handleClick = () =>{
+    this.props.onSave(
+      this.props.exerciseId,
+      this.state.value,
+      this.state.language
+    )
   }
   render(){
     return(
@@ -50,7 +57,7 @@ export default class Editor extends React.Component{
             <Select.Option value={'javascript'}>Java</Select.Option>
             <Select.Option value={'java'}>JavaScript</Select.Option>
           </Select>
-          <Button>Save</Button>
+          <Button type={'primary'} onClick={this.handleClick}>Save</Button>
         </EditorMenu>
     <Code
       mode={this.state.language}

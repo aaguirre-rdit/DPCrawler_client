@@ -3,7 +3,7 @@ import {Typography} from 'antd';
 import styled from 'styled-components';
 import Editor from "./Editor";
 import ExerciseList from "./ExerciseList";
-import {getList, getExerciseById} from "./api";
+import {getList, submitExercise} from "./api";
 import ExerciseView from './ExerciseView';
 const Container = styled.div`
   display:flex;
@@ -28,12 +28,25 @@ class App extends Component {
   componentDidMount() {
     getList().then((res)=>{
       if (res.data){
+        console.log(res.data)
         this.setState({
           exerciseList:res.data
         })
       }
     })
   }
+  onSave = (id,value, language) =>{
+    console.log({id,value,language});
+    const data = {
+      exercise_id:id,
+      content:value,
+      language:language
+    };
+    console.log({data})
+    submitExercise(data).then(res => {
+      console.log(res.data)
+    })
+  };
   resetId = ()=> {
     this.setState({
       selectedExerciseId:null,
@@ -56,7 +69,7 @@ class App extends Component {
               <ExerciseList list={this.state.exerciseList} OnClick={this.onExerciseClick}/>
           }
 
-          <Editor/>
+          <Editor onSave={this.onSave} exerciseId={this.state.selectedExerciseId}/>
         </Container>
       </div>
     );
